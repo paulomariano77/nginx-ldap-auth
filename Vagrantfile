@@ -5,7 +5,7 @@ VAGRANTFILE_API_VERSION = "2"
 BOX_NAME = ENV['VAGRANT_BOX_NAME'] || "bento/centos-7.4"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.define "nginx" do |gocdserver|
+    config.vm.define "nginx" do |nginx|
         nginx.vm.box = BOX_NAME
         nginx.vm.hostname = "nginx-ldap-auth"
         nginx.vm.network :private_network, ip: "192.168.10.10"
@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     config.vm.provider "virtualbox" do |vbox|
-        vbox.customize ["modifyvm", :id]
+        vbox.name = "nginx-ldap-auth"
         vbox.memory = 2048
         vbox.cpus = 2
     end
