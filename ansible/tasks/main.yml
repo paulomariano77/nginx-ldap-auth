@@ -1,0 +1,4 @@
+---
+- name: installs RedHat Family
+  include_tasks: install_redhat.yml
+  when: ansible_os_family == 'RedHat'

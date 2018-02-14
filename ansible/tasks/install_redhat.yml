@@ -1,0 +1,19 @@
+---
+- name: adds NGINX yum repository
+  yum_repository:
+    name: nginx
+    description: NGINX Oficial Repository
+    baseurl: http://nginx.org/packages/{{ 'rhel' if ansible_distribution == 'RedHat' else ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/$basearch/
+    gpgcheck: no
+    enabled: yes
+
+- name: installs NGINX
+  yum:
+    name: nginx
+    state: present
+
+- name: start nginx service
+  service:
+    name: nginx
+    state: started
+    enabled: true
