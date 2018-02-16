@@ -46,7 +46,7 @@ class AppHandler(BaseHTTPRequestHandler):
             self.send_response(500)
             return
 
-        html_file = codecs.open("login-page/login.html", 'r', 'utf-8')
+        html_file = codecs.open("html/index.html", 'r', 'utf-8')
         html = html_file.read()
         self.send_response(200)
         self.end_headers()
@@ -83,7 +83,8 @@ class AppHandler(BaseHTTPRequestHandler):
             # and share a key with auth daemon that extracts this information
             #
             # WARNING WARNING WARNING
-            enc = base64.b64encode(user + ':' + passwd)
+            enc_b32 = base64.b32encode(user + ':' + passwd)
+            enc = base64.b64encode(enc_b32)
             self.send_header('Set-Cookie', 'nginxauth=' + enc + '; httponly')
 
             self.send_header('Location', target)
