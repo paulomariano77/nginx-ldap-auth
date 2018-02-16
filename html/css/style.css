@@ -79,18 +79,3 @@ body {
 #login .btn.btn-custom {
     margin-bottom: 20px;
 }
-
-/*--------------------------------------------------
-:: Inputs & Buttons
--------------------------------------------------- */
-.form-control {
-    color: #212121;
-}
-.btn-custom {
-    color: #fff;
-    background-color: #92c83e;
-}
-.btn-custom:hover,
-.btn-custom:focus {
-    color: #fff;
-}
