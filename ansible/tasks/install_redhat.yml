@@ -12,8 +12,13 @@
     name: nginx
     state: present
 
-- name: start nginx service
+- name: starts nginx service
   service:
     name: nginx
     state: started
     enabled: true
+
+- name: installs python-ldap
+  yum:
+    name: python-ldap
+    state: present
