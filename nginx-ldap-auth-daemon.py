@@ -71,9 +71,9 @@ class AuthHandler(BaseHTTPRequestHandler):
         ctx['action'] = 'decoding credentials'
 
         try:
-            auth_decoded = base64.b64decode(auth_header[6:])
+            auth_decoded_b32 = base64.b64decode(auth_header[6:])
+            auth_decoded = base64.b32decode(auth_decoded_b32)
             user, passwd = auth_decoded.split(':', 1)
-
         except:
             self.auth_failed(ctx)
             return True
