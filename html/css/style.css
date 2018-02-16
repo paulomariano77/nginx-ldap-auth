@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'foundation-icons';
+    src: url('foundation-icons.ttf');
+}
 html,
 body {
     height: 100%;
@@ -22,7 +26,7 @@ body {
 :: Login Section
 -------------------------------------------------- */
 #login {
-    padding-top: 50px
+    padding-top: 50px;
 }
 #login .form-wrap {
     width: 100%;
@@ -54,13 +58,13 @@ body {
     user-select: none;
 }
 #login .checkbox.show:before {
-    content: '\e013';
-    color: #1fa67b;
-    font-size: 17px;
-    margin: 1px 0 0 3px;
+    content: '\f126';
+    color: #6d6d6d;
+    font-size: 20px;
+    margin: 1px 1px 0 5px;
     position: absolute;
     pointer-events: none;
-    font-family: 'Glyphicons Halflings';
+    font-family: 'foundation-icons';
 }
 #login .checkbox .character-checkbox {
     width: 25px;
