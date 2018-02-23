@@ -22,3 +22,78 @@
   yum:
     name: python-ldap
     state: present
+
+- name: creates nginx-ldap-auth working directory
+  file:
+    path: /var/run/nginx-ldap-auth
+    state: directory
+    owner: nginx
+    group: nginx
+    mode: 0755
+
+- name: creates nginx-ldap-auth log directory
+  file:
+    path: /var/log/nginx-ldap-auth
+    state: directory
+    owner: nginx
+    group: nginx
+    mode: 0755
+
+- name: copys files to nginx-ldap-auth directory
+  copy:
+    src: "{{ item }}"
+    dest: /var/run/nginx-ldap-auth
+    owner: nginx
+    group: nginx
+    mode: 0755
+  with_items:
+    - "{{ 'src/*.py' | fileglob }}"
+    - "{{ 'scripts/*.sh' | fileglob }}"
+
+- name: creates systemd services
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/system
+  with_items:
+    - "{{ 'files/*.service' | fileglob }}"
+
+- name: creates root folder for html files
+  file:
+    path: /var/www/nginx-ldap-auth
+    state: directory
+    owner: nginx
+    group: nginx
+    mode: 0755
+
+- name: copys html files
+  copy:
+    src: html/
+    dest: /var/www/nginx-ldap-auth
+    owner: nginx
+    group: nginx
+    directory_mode: true
+    mode: 0755
+
+- file: dest=/var/www/nginx-ldap-auth mode=0755 recurse=true
+
+- name: start end enable nginx-ldap-auth systemd service
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    - nginx-ldap-auth
+    - backend-sample-app
+
+- name: configures site nginx-ldap-auth
+  copy:
+    src: files/nginx-ldap-auth.conf
+    dest: /etc/nginx/conf.d/
+    owner: root
+    group: root
+  notify: restart nginx
+
+- name: configures logrotate
+  copy: 
+    src: files/nginx-ldap-auth.logrotate
+    dest: /etc/logrotate.d/nginx-ldap-auth
