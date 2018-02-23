@@ -1,6 +1,0 @@
----
-- name: Playbook to configure nginx-ldap-auth
-  hosts: all
-  become: true
-  tasks:
-    - include_tasks: tasks/main.yml
