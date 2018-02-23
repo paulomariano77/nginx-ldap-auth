@@ -1,2 +1,4 @@
 .vagrant
 .fact_cache
+.vscode
+src/*.pyc
