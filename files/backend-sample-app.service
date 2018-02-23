@@ -1,0 +1,19 @@
+[Unit]
+Description=Backend sample App
+After=network.target network-online.target nginx.service nginx-ldap-auth.service
+
+[Service]
+Type=simple
+PIDFile=/var/run/nginx-ldap-auth/backend-sample-app.pid
+User=nginx
+Group=nginx
+WorkingDirectory=/var/run/nginx-ldap-auth
+ExecStart=/bin/sh backend-sample-app-ctl.sh start
+ExecStop=/bin/sh backend-sample-app-ctl.sh stop
+KillMode=process
+KillSignal=SIGINT
+Restart=on-failure
+
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+/var/log/nginx-ldap-auth/*.log {
+	delaycompress
+	create 0644 nginx nginx
+	postrotate
+		/usr/bin/systemctl restart nginx-ldap-auth
+		/usr/bin/systemctl restart backend-sample-app
+	endscript
+}

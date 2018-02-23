@@ -1,0 +1,18 @@
+[Unit]
+Description=LDAP authentication helper for Nginx
+After=network.target network-online.target nginx.service
+
+[Service]
+Type=simple
+PIDFile=/var/run/nginx-ldap-auth/nginx-ldap-auth-daemon.pid
+User=nginx
+Group=nginx
+WorkingDirectory=/var/run/nginx-ldap-auth
+ExecStart=/bin/sh nginx-ldap-auth-daemon-ctl-rh.sh start
+ExecStop=/bin/sh nginx-ldap-auth-daemon-ctl-rh.sh stop
+KillMode=process
+KillSignal=SIGINT
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
