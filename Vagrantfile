@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         nginx.vm.network :private_network, ip: "192.168.10.10"
 
         nginx.vm.provision "ansible" do |ansible|
-            ansible.playbook = "ansible/install.yml"
+            ansible.playbook = "playbook.yml"
         end
     end
 

@@ -1,6 +1,6 @@
 FROM python:2-alpine
 
-COPY nginx-ldap-auth-daemon.py /usr/src/app/
+COPY src/*.py /usr/src/app/
 
 WORKDIR /usr/src/app/
 
