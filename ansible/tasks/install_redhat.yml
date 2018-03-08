@@ -93,6 +93,13 @@
     group: root
   notify: restart nginx
 
+- name: enables seports 8888, 9000 and 8081
+  seport:
+    ports: 8888, 9000, 8081
+    proto: tcp
+    setype: http_port_t
+    state: present
+
 - name: configures logrotate
   copy: 
     src: files/nginx-ldap-auth.logrotate
