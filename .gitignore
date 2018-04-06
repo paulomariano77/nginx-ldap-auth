@@ -2,3 +2,4 @@
 .fact_cache
 .vscode
 src/*.pyc
+nginx-ldap-auth-0.0.3/
